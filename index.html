@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="maideparte. — nu arunca, dă mai departe. Donează alimente și obiecte și rezervă gratuit ce îți trebuie.">
+  <title>maideparte. — Nu arunca, dă mai departe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= BANDĂ CU NOUTĂȚI ================= -->
+  <div class="banda-stiri" aria-label="Activitate recentă">
+    <div class="banda-pista" id="banda-pista"></div>
+  </div>
+
+  <!-- ================= ANTET ================= -->
+  <header class="antet">
+    <div class="container antet-interior">
+      <a href="#" class="logo" aria-label="maideparte, pagina principală">
+        <span class="logo-semn" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M8 20a9 9 0 0 1 15-9"/><path d="M24 6v6h-6"/><path d="M24 12a9 9 0 0 1-15 9"/><path d="M8 26v-6h6"/></svg>
+        </span>
+        maideparte<span class="logo-punct">.</span>
+      </a>
+      <nav class="meniu" aria-label="Navigare principală">
+        <a href="#anunturi">Anunțuri</a>
+        <a href="#cum">Cum merge</a>
+        <a href="#impact">Impact</a>
+        <a href="#puncte">Puncte de colectare</a>
+        <a href="#quiz">Quiz</a>
+      </nav>
+      <div class="antet-actiuni">
+        <button type="button" class="btn btn-alb" id="deschide-punga">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          Punga mea
+          <span class="bulina" id="numar-punga">0</span>
+        </button>
+        <button type="button" class="btn btn-rosu" data-doneaza>Donează</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= PREZENTARE ================= -->
+  <section class="erou">
+    <div class="container erou-grila">
+      <div class="erou-text">
+        <span class="eticheta-mica">gratuit · local · fără risipă</span>
+        <h1>
+          Nu arunca.
+          <span class="h1-linie"><span class="marcaj">Dă mai</span> departe.</span>
+        </h1>
+        <p>
+          Ai pâine rămasă de azi, haine din care a crescut copilul sau manuale de anul trecut?
+          Pune-le aici. Cineva din cartier le rezervă gratuit și vine să le ridice.
+        </p>
+        <div class="erou-actiuni">
+          <a href="#anunturi" class="btn btn-negru btn-mare">Vezi ce se dă azi</a>
+          <button type="button" class="btn btn-alb btn-mare" data-doneaza>Vreau să donez</button>
+        </div>
+      </div>
+
+      <div class="erou-colaj" aria-hidden="true">
+        <div class="colaj-card colaj-1">
+          <div class="colaj-ilustratie fundal-galben" data-ilustratie="paine"></div>
+          <strong>10 pâini de casă</strong>
+          <span class="sticker sticker-rosu">expiră mâine</span>
+        </div>
+        <div class="colaj-card colaj-2">
+          <div class="colaj-ilustratie fundal-menta" data-ilustratie="haine"></div>
+          <strong>Geacă de iarnă, 8–10 ani</strong>
+          <span class="sticker sticker-alb">stare foarte bună</span>
+        </div>
+        <div class="colaj-card colaj-3">
+          <div class="colaj-ilustratie fundal-cer" data-ilustratie="carti"></div>
+          <strong>Manuale clasa a V-a</strong>
+        </div>
+        <span class="sticker-mare">100%<br>gratuit</span>
+      </div>
+    </div>
+
+    <div class="container mozaic-cifre">
+      <div class="tigla tigla-galben"><span class="tigla-cifra" id="cifra-kg">0</span><span>kg de mâncare salvată</span></div>
+      <div class="tigla tigla-menta"><span class="tigla-cifra" id="cifra-obiecte">0</span><span>obiecte date mai departe</span></div>
+      <div class="tigla tigla-cer"><span class="tigla-cifra" id="cifra-active">0</span><span>anunțuri disponibile acum</span></div>
+      <div class="tigla tigla-lila"><span class="tigla-cifra" id="cifra-donatori">0</span><span>donatori din cartier</span></div>
+    </div>
+  </section>
+
+  <!-- ================= ANUNȚURI ================= -->
+  <main id="anunturi" class="anunturi">
+    <div class="container">
+      <div class="sectiune-cap">
+        <h2>Ce se dă <span class="subliniat">azi</span></h2>
+        <p>Rezervă gratuit, adaugă în pungă și ridică în intervalul ales de donator.</p>
+      </div>
+
+      <div class="panou-filtre">
+        <div class="comutator-tip" role="tablist" aria-label="Tipul anunțului">
+          <button type="button" role="tab" class="activ" data-tip="toate">Toate</button>
+          <button type="button" role="tab" data-tip="aliment">Alimente</button>
+          <button type="button" role="tab" data-tip="obiect">Obiecte</button>
+        </div>
+        <div class="cautare">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="cautare" placeholder="Caută: pâine, geacă, Militari..." aria-label="Caută anunțuri">
+        </div>
+        <select id="sortare" aria-label="Sortează anunțurile">
+          <option value="expira">Expiră cel mai curând</option>
+          <option value="noi">Cele mai noi</option>
+          <option value="cantitate">Cantitate mare</option>
+        </select>
+        <label class="bifa">
+          <input type="checkbox" id="doar-disponibile" checked>
+          <span class="bifa-cutie" aria-hidden="true"></span>
+          Doar disponibile
+        </label>
+      </div>
+
+      <div class="categorii" id="categorii" role="group" aria-label="Categorii"></div>
+
+      <p class="rezultate" id="rezultate"></p>
+      <div class="grila" id="grila" aria-live="polite"></div>
+      <div class="gol hidden" id="gol">
+        <strong>Nimic aici, deocamdată.</strong>
+        <span>Încearcă altă categorie sau fii tu primul care donează ceva.</span>
+        <button type="button" class="btn btn-alb" id="reseteaza">Arată tot</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= CUM MERGE ================= -->
+  <section id="cum" class="cum">
+    <div class="container">
+      <div class="sectiune-cap">
+        <h2>Cum merge?</h2>
+        <p>Trei pași. Fără conturi, fără bani, fără bătăi de cap.</p>
+      </div>
+      <ol class="pasi">
+        <li class="pas fundal-galben">
+          <span class="pas-numar">1</span>
+          <h3>Pui un anunț</h3>
+          <p>Spui ce dai, cât, până când e bun și când poate fi ridicat. Durează un minut.</p>
+        </li>
+        <li class="pas fundal-menta">
+          <span class="pas-numar">2</span>
+          <h3>Cineva rezervă</h3>
+          <p>Vecinii adaugă în pungă ce le trebuie și primesc un cod de ridicare.</p>
+        </li>
+        <li class="pas fundal-cer">
+          <span class="pas-numar">3</span>
+          <h3>Se dă mai departe</h3>
+          <p>La ridicare arată codul. Mâncarea nu ajunge la gunoi, iar obiectele primesc o a doua viață.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= IMPACT ================= -->
+  <section id="impact" class="impact">
+    <div class="container">
+      <div class="sectiune-cap">
+        <h2>Cât contează un gest mic?</h2>
+        <p>Mută cursoarele și vezi ce ar ieși dacă blocul tău ar da mai departe ce nu folosește.</p>
+      </div>
+      <div class="impact-grila">
+        <div class="calculator">
+          <label class="cursor">
+            <span>Familii care participă <b id="val-familii">20</b></span>
+            <input type="range" id="familii" min="1" max="200" value="20">
+          </label>
+          <label class="cursor">
+            <span>Kilograme de mâncare salvate pe lună, de familie <b id="val-kg">3</b></span>
+            <input type="range" id="kg-luna" min="1" max="10" value="3">
+          </label>
+          <p class="nota">Estimări orientative: o masă ≈ 0,5 kg de mâncare, iar fiecare kilogram de mâncare aruncată produce în jur de 2,5 kg de CO₂ (valori medii folosite des în studii).</p>
+        </div>
+        <div class="rezultat tigla-galben"><span class="rezultat-cifra" id="rez-kg">0</span><span>kg de mâncare salvate într-un an</span></div>
+        <div class="rezultat tigla-menta"><span class="rezultat-cifra" id="rez-mese">0</span><span>mese care nu ajung la gunoi</span></div>
+        <div class="rezultat tigla-cer"><span class="rezultat-cifra" id="rez-co2">0</span><span>kg de CO₂ evitate</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PUNCTE DE COLECTARE ================= -->
+  <section id="puncte" class="puncte">
+    <div class="container">
+      <div class="sectiune-cap">
+        <h2>Puncte de colectare</h2>
+        <p>Nu vrei să dai adresa ta? Lasă lucrurile la un punct partener și le ridică altcineva de acolo.</p>
+      </div>
+      <div class="puncte-grila" id="puncte-grila"></div>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section id="quiz" class="quiz">
+    <div class="container quiz-grila">
+      <div class="quiz-intro">
+        <span class="eticheta-mica">quiz · 5 întrebări</span>
+        <h2>Risipă sau nu?</h2>
+        <p>Testează ce știi despre termenele de pe etichete și despre cum donezi corect. Fiecare răspuns corect valorează 10 puncte.</p>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-sus">
+          <span id="progres-quiz">Gata de start</span>
+          <span id="scor">Scor: 0</span>
+        </div>
+        <div class="quiz-bara"><div id="bara-quiz"></div></div>
+        <div id="continut">
+          <p id="intrebare">Apasă START ca să începi.</p>
+          <div id="raspunsuri"></div>
+          <p id="mesaj"></p>
+        </div>
+        <div class="quiz-actiuni">
+          <button type="button" class="btn btn-rosu btn-mare" id="start">START JOC</button>
+          <button type="button" class="btn btn-negru" id="urmatoarea" hidden>Următoarea întrebare</button>
+          <button type="button" class="btn btn-alb" id="reia" hidden>Joacă din nou</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ÎNTREBĂRI ================= -->
+  <section class="intrebari">
+    <div class="container">
+      <div class="sectiune-cap">
+        <h2>Întrebări pe care le auzim des</h2>
+      </div>
+      <div class="acordeon">
+        <details>
+          <summary>Chiar e totul gratuit?</summary>
+          <p>Da. Nu se vinde și nu se cumpără nimic. Dacă vezi un anunț care cere bani, nu răspunde la el.</p>
+        </details>
+        <details>
+          <summary>Ce alimente pot dona?</summary>
+          <p>Alimente bune de consumat: pâine, fructe, legume, produse sigilate sau mâncare gătită păstrată corect, la frigider. Nu dona produse trecute de data „A se consuma înainte de”.</p>
+        </details>
+        <details>
+          <summary>Ce se întâmplă dacă nu ajung la ridicare?</summary>
+          <p>Anulează rezervarea din „Punga mea”, ca produsele să redevină disponibile pentru alții. Mâncarea nu poate aștepta.</p>
+        </details>
+        <details>
+          <summary>Datele mele sunt publice?</summary>
+          <p>Nu. Aceasta este o versiune demonstrativă: totul rămâne doar în browserul tău și nu se trimite nicăieri.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SUBSOL ================= -->
+  <footer class="subsol">
+    <div class="container subsol-interior">
+      <div class="subsol-mare">nu arunca.<br>dă mai departe.</div>
+      <div class="subsol-coloane">
+        <div>
+          <h4>Platformă</h4>
+          <a href="#anunturi">Anunțuri</a>
+          <a href="#impact">Impact</a>
+          <a href="#puncte">Puncte de colectare</a>
+        </div>
+        <div>
+          <h4>Ajutor</h4>
+          <a href="#quiz">Quiz despre risipă</a>
+          <a href="#cum">Cum merge</a>
+          <a href="#">Reguli pentru donații</a>
+        </div>
+      </div>
+      <p class="subsol-jos">© 2026 maideparte. — versiune demonstrativă, datele rămân în browserul tău.</p>
+    </div>
+  </footer>
+
+  <!-- ================= DETALII ANUNȚ ================= -->
+  <dialog id="modal-detalii" class="modal" aria-label="Detaliile anunțului">
+    <div id="detalii-continut"></div>
+  </dialog>
+
+  <!-- ================= DONAȚIE ÎN 3 PAȘI ================= -->
+  <dialog id="modal-donatie" class="modal modal-lat" aria-labelledby="titlu-donatie">
+    <form id="form-donatie" novalidate>
+      <div class="modal-cap">
+        <h2 id="titlu-donatie">Dă mai departe</h2>
+        <button type="button" class="btn-x" data-inchide aria-label="Închide">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <ol class="pasi-wizard" id="pasi-wizard">
+        <li class="activ"><span>1</span>Ce dai</li>
+        <li><span>2</span>Detalii</li>
+        <li><span>3</span>Ridicare</li>
+      </ol>
+
+      <div class="wizard-corp">
+        <div class="wizard-pas" data-pas="1">
+          <p class="intrebare-pas">Ce fel de lucru dai mai departe?</p>
+          <div class="alegere-tip">
+            <label><input type="radio" name="tip" value="aliment" checked><span class="fundal-galben"><b>Aliment</b><small>pâine, fructe, mâncare gătită...</small></span></label>
+            <label><input type="radio" name="tip" value="obiect"><span class="fundal-menta"><b>Obiect</b><small>haine, cărți, jucării...</small></span></label>
+          </div>
+          <p class="intrebare-pas">Alege categoria</p>
+          <div class="alegere-categorie" id="alegere-categorie"></div>
+        </div>
+
+        <div class="wizard-pas" data-pas="2" hidden>
+          <label class="camp"><span>Titlul anunțului</span><input name="titlu" maxlength="60" placeholder="Ex: 6 pâini de casă"></label>
+          <label class="camp"><span>Descriere scurtă</span><textarea name="descriere" rows="3" maxlength="240" placeholder="Ce e, în ce stare, orice detaliu util"></textarea></label>
+          <div class="rand">
+            <label class="camp"><span>Cantitate</span><input name="cantitate" placeholder="Ex: 6 bucăți"></label>
+            <label class="camp"><span>Greutate aproximativă (kg)</span><input name="kg" type="number" min="0.1" step="0.1" value="1"></label>
+          </div>
+          <div class="rand">
+            <label class="camp doar-aliment"><span>Bun de consumat până la</span><input name="expira" type="date"></label>
+            <label class="camp doar-obiect" hidden><span>Stare</span>
+              <select name="stare">
+                <option>Ca nou</option>
+                <option selected>Foarte bună</option>
+                <option>Bună, cu urme de folosire</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="wizard-pas" data-pas="3" hidden>
+          <div class="rand">
+            <label class="camp"><span>Numele tău sau al locului</span><input name="donator" placeholder="Ex: Brutăria din colț"></label>
+            <label class="camp"><span>Cine donează</span>
+              <select name="tipDonator">
+                <option value="persoana">Persoană</option>
+                <option value="magazin">Magazin</option>
+                <option value="restaurant">Restaurant</option>
+              </select>
+            </label>
+          </div>
+          <div class="rand">
+            <label class="camp"><span>Zona de ridicare</span><input name="zona" placeholder="Ex: Floreasca"></label>
+            <label class="camp"><span>Interval de ridicare</span>
+              <select name="ridicare">
+                <option>Azi, 17:00–19:00</option>
+                <option>Azi, 19:00–21:00</option>
+                <option>Mâine, 09:00–12:00</option>
+                <option>Mâine, 16:00–19:00</option>
+                <option>Oricând, cu un mesaj înainte</option>
+              </select>
+            </label>
+          </div>
+          <p class="intrebare-pas">Așa va arăta anunțul tău</p>
+          <div class="previzualizare-anunt" id="previzualizare-anunt"></div>
+        </div>
+        <p class="eroare-pas" id="eroare-pas" role="alert"></p>
+      </div>
+
+      <div class="modal-jos">
+        <button type="button" class="btn btn-alb" id="inapoi" hidden>Înapoi</button>
+        <span class="spatiu"></span>
+        <button type="button" class="btn btn-negru" id="inainte">Continuă</button>
+        <button type="submit" class="btn btn-rosu" id="publica" hidden>Publică anunțul</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ================= PUNGA MEA ================= -->
+  <div class="umbra-sertar" id="umbra-sertar" hidden></div>
+  <aside class="sertar" id="sertar" aria-label="Punga mea" aria-hidden="true">
+    <div class="sertar-cap">
+      <h2>Punga mea</h2>
+      <button type="button" class="btn-x" id="inchide-punga" aria-label="Închide">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="sertar-tab" role="tablist">
+      <button type="button" role="tab" class="activ" data-tab="punga">În pungă <span id="tab-numar-punga">0</span></button>
+      <button type="button" role="tab" data-tab="rezervari">Rezervări <span id="tab-numar-rez">0</span></button>
+    </div>
+    <div class="sertar-corp" id="sertar-corp"></div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
